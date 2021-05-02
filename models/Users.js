@@ -8,12 +8,12 @@ const usuarioSchema = mongoose.Schema({
   password: String
 });
 
-usuarioSchema.statics.hashPassword = function(passwordEnClaro) {
-  return bcrypt.hash(passwordEnClaro, 7);
+usuarioSchema.statics.hashPassword = function(passwordDecrypted) {
+  return bcrypt.hash(passwordDecrypted, 10);
 }
 
-usuarioSchema.methods.comparePassword = function(passwordEnClaro) {
-  return bcrypt.compare( passwordEnClaro, this.password);
+usuarioSchema.methods.comparePassword = function(passwordDecrypted) {
+  return bcrypt.compare( passwordDecrypted, this.password);
 }
 
 const Users = mongoose.model('Users', usuarioSchema);

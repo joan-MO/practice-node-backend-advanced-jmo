@@ -9,8 +9,8 @@ module.exports = async function initUsers() {
        
         const users = await Users.insertMany([
             {
-              email: "admin@example.com",
-              password: Users.hashPassword('1234')
+              email: "user@example.com",
+              password: await Users.hashPassword('1234')
             }
         ]);
     
