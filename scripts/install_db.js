@@ -1,21 +1,20 @@
-'use strict'
+'use strict';
+require('dotenv').config();
 const db = require('../lib/connectMongoose');
-const Anuncio = require('../models/Anuncio');
-const dataAnuncio = require('./anuncios.json')
+//const Anuncio = require('../models/Anuncio');
+const initAnnoucement = require('./initAnnoucement');
+const initUsers = require('./initUsers');
 
 initDB().catch(err => console.error(err));
 
 async function initDB(){
     try {
-        
-        await Anuncio.deleteMany();
-        await Anuncio.insertMany(dataAnuncio.announcements)
+        await initAnnoucement();
+        await initUsers();
         db.close();
        
     } catch (error) {
         console.log(error);
     }
 }
-
-
 
