@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const jwtLoginController = require('./controllers/jwtLoginController');
 var indexRouter = require('./routes/index');
 
 var app = express();
@@ -23,7 +23,8 @@ app.use(express.static('/images/anuncios'))
 
 //Router api
 
-app.use('/apiv1/anuncios', require('./routes/api/anuncios'))
+app.use('/apiv1/anuncios', require('./routes/api/anuncios'));
+app.post('/apiv1/authenticate',   jwtLoginController.postJWT);
 //app.use('/apiv1/tags',require('./routes/api/tags'))
 //app.use('/apiv1/anuncios/tags', require('./routes/api/anuncios'))
 

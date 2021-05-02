@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 const asyncHandler = require('express-async-handler')
 const Anuncio = require('../../models/Anuncio');
-const filtersFind = require('../../utils/utils')
+const filtersFind = require('../../utils/utils');
+const jwtAuthentificate = require('../../utils/jwtAuthentificate');
 
 //GET /apiv1/anuncios
 
-router.get('/', asyncHandler(async (req, res, next) => {
+router.get('/',jwtAuthentificate, asyncHandler(async (req, res, next) => {
 
     const name = req.query.name;
     const sale = req.query.sale;
