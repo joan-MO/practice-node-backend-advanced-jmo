@@ -12,6 +12,7 @@ var storage = multer.diskStorage({
       cb(null, './public/images/anuncios')
     },
     filename: function (req, file, cb) {
+        console.log(file);
       cb(null,Date.now() + path.extname(file.originalname))
     }
   })
@@ -63,18 +64,12 @@ router.get('/tags', asyncHandler(async (req, res, next) => {
 // POST /apiv1/anuncios {body}
 
 router.post('/',upload.single('photo'), asyncHandler(async (req, res, next) => {
-    
-    //var img = fs.readFileSync(req.file.path);
-    //var encode_image = img.toString('base64');
-    // Define a JSONobject for the image attributes for saving to database
-     
 
-    const {name, sale, price} = req.body;
+    const {tags, name, sale, price} = req.body;
 
-        
-    const anuncio = new Anuncio({name,sale,price, photo: req.file.originalname})
+    const anuncio = new Anuncio({tags, name, sale, price, photo: req.file.filename})
 
-    const anuncioCreate = await anuncio.save();
+    await anuncio.save();
 
     res.status(201).json({ result: anuncio});
 

@@ -27,7 +27,7 @@
           <% if (!anuncio.photo || anuncio.photo === null || anuncio.photo === undefined ) { %>
             <img src="/images/anuncios/default.jpg" alt="" width="100" height="100">
           <% } else {%>
-          <img src="/images/anuncios/1620041431287.jpg" alt="" width="100" height="100" onerror = "this.onerror = null; this.src = '/images/anuncios/default.jpg';">
+          <img src="/images/anuncios/<%= anuncio.photo %> " alt="" width="100" height="100" onerror = "this.onerror = null; this.src = '/images/anuncios/default.jpg';">
           <% } %> 
         </td>
       </tr>
