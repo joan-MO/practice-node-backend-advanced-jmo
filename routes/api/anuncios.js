@@ -4,8 +4,19 @@ const asyncHandler = require('express-async-handler')
 const Anuncio = require('../../models/Anuncio');
 const filtersFind = require('../../utils/utils');
 const jwtAuthentificate = require('../../utils/jwtAuthentificate');
+var path = require('path');
+
 var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/anuncios')
+    },
+    filename: function (req, file, cb) {
+      cb(null,Date.now() + path.extname(file.originalname))
+    }
+  })
+   
+var upload = multer({ storage: storage })
 
 //GET /apiv1/anuncios
 
@@ -51,11 +62,17 @@ router.get('/tags', asyncHandler(async (req, res, next) => {
 
 // POST /apiv1/anuncios {body}
 
-router.post('/', asyncHandler(async (req, res, next) => {
+router.post('/',upload.single('photo'), asyncHandler(async (req, res, next) => {
+    
+    //var img = fs.readFileSync(req.file.path);
+    //var encode_image = img.toString('base64');
+    // Define a JSONobject for the image attributes for saving to database
+     
 
-    const anuncioData = req.body;
+    const {name, sale, price} = req.body;
+
         
-    const anuncio = new Anuncio(anuncioData)
+    const anuncio = new Anuncio({name,sale,price, photo: req.file.originalname})
 
     const anuncioCreate = await anuncio.save();
 
