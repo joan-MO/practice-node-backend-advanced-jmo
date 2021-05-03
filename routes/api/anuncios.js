@@ -4,26 +4,33 @@ const asyncHandler = require('express-async-handler')
 const Anuncio = require('../../models/Anuncio');
 const filtersFind = require('../../utils/utils');
 const jwtAuthentificate = require('../../utils/jwtAuthentificate');
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
 
 //GET /apiv1/anuncios
 
 router.get('/',jwtAuthentificate, asyncHandler(async (req, res, next) => {
 
-    const name = req.query.name;
-    const sale = req.query.sale;
-    const price = req.query.price;
-    const tags = req.query.tags;
-    const limit = parseInt(req.query.limit) || null;
-    const start = parseInt(req.query.start) || null;
-    const fields = req.query.fields || null;
-    const sort = req.query.sort || null;
-    const filters = {};
-      
-    filtersFind(filters,tags,name,sale,price)
- 
-    const resultado = await Anuncio.list(filters, limit, start, fields, sort);
-    res.json(resultado);
+    try {     
+        const name = req.query.name;
+        const sale = req.query.sale;
+        const price = req.query.price;
+        const tags = req.query.tags;
+        const limit = parseInt(req.query.limit) || null;
+        const start = parseInt(req.query.start) || null;
+        const fields = req.query.fields || null;
+        const sort = req.query.sort || null;
+        const filters = {};
         
+        filtersFind(filters,tags,name,sale,price)
+    
+        const resultado = await Anuncio.list(filters, limit, start, fields, sort);
+        res.json(resultado);
+        
+    } catch (error) {
+        next(error);
+    }
+
 }));
 
 // GET /apiv1/anuncios/tags
