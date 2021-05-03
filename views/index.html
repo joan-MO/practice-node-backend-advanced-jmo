@@ -5,7 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Announcements</h1>
+    <h1><%= __('Anuncios')%></h1>
     <% if (anuncios.length === 0) { %>
         <p>Not found your search</p>
     <% } else { %>
@@ -20,7 +20,7 @@
       <% anuncios.forEach(anuncio => { %>
       <tr>
         <td><%= anuncio.name %></td>
-        <td><%= anuncio.sale %></td>
+        <td><%=  anuncio.sale ? 'venta':'compra' %></td>
         <td><%= anuncio.price %></td>
         <td><%= anuncio.tags %></td>
         <td>
