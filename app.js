@@ -29,15 +29,15 @@ app.post('/apiv1/authenticate',   jwtLoginController.postJWT);
 //app.use('/apiv1/tags',require('./routes/api/tags'))
 //app.use('/apiv1/anuncios/tags', require('./routes/api/anuncios'))
 
-//Router web
-
-app.use('/', indexRouter);
-
 // Setup de i18n
 const i18n = require('./lib/i18nConfigure');
 exports = i18n;
 app.use(i18n.init);
 
+
+//Router web
+
+app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
