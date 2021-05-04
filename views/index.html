@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Announcements</title>
+    <title><%=__('Anuncios') %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Anuncios</h1>
+    <h1><%= __('Anuncios') %> </h1>
     <% if (anuncios.length === 0) { %>
-        <p>Not found your search</p>
+        <p><%= __('No encontrado tu busqueda') %> ></p>
     <% } else { %>
     <table>
       <tr>
-        <th>Name</th>
-        <th>Sale</th>
-        <th>Price</th>
-        <th>Tags</th>
-        <th>Photos</th>
+        <th><%= __('Nombre') %> </th>
+        <th><%= __('Venta') %> </th>
+        <th><%= __('Precio') %> </th>
+        <th><%= __('Tags') %> </th>
+        <th><%= __('Fotos') %> </th>
       </tr>
       <% anuncios.forEach(anuncio => { %>
       <tr>
