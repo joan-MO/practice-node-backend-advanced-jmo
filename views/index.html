@@ -5,6 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <% include header.html %>
+    <div style='padding:40px'>
     <h1><%= __('Anuncios') %> </h1>
     <% if (anuncios.length === 0) { %>
         <p><%= __('No encontrado tu busqueda') %> ></p>
@@ -34,6 +36,6 @@
       <% }) %>
     </table>
     <% } %> 
-    
+  </div>
   </body>
 </html>
