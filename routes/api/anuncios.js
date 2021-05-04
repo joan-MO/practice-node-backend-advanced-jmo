@@ -5,6 +5,8 @@ const Anuncio = require('../../models/Anuncio');
 const filtersFind = require('../../utils/utils');
 const jwtAuthentificate = require('../../utils/jwtAuthentificate');
 var path = require('path');
+const cote = require('cote');
+const requester = new cote.Requester({ name: 'client of thumbnail'});
 
 var multer  = require('multer')
 var storage = multer.diskStorage({
@@ -12,7 +14,6 @@ var storage = multer.diskStorage({
       cb(null, './public/images/anuncios')
     },
     filename: function (req, file, cb) {
-        console.log(file);
       cb(null,Date.now() + path.extname(file.originalname))
     }
   })
@@ -67,11 +68,21 @@ router.post('/',upload.single('photo'), asyncHandler(async (req, res, next) => {
 
     const {tags, name, sale, price} = req.body;
 
+    const file = req.file;
+        
+    requester.send({
+        type: 'thumbnail',
+        file: file,
+    });
+
     const anuncio = new Anuncio({tags, name, sale, price, photo: req.file.filename})
 
     await anuncio.save();
 
     res.status(201).json({ result: anuncio});
+
+res.send('test')
+    
 
 }));
 
