@@ -38,6 +38,8 @@ app.use(i18n.init);
 //Router web
 
 app.use('/', indexRouter);
+app.use('/change-locale', require('./routes/change-locale'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
