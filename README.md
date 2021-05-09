@@ -31,11 +31,17 @@ When done, you can run the project by entering these commands in this order:
 mongod (to run your database mongo)
 ```
 
+Copy .env.example to .env and review the config with your real data in this case for jwt auth.
+
+
+This command is used to run microservices and applications (the microservice is necessary to upload images and change their size):
+
 ```
-npm run dev
+npx pm2 start
 ```
 
 The default port to connect to is : 3000 /` localhost:3000`
+
 
 ## Methods API
 
@@ -54,6 +60,7 @@ I use these technologies:
 - Node
 - Express
 - MongoDB
+- Microservices
 - Git
 - API Rest
 - Html
