@@ -8,7 +8,7 @@ const responder = new cote.Responder({ name: 'service thumbnail'});
 responder.on('thumbnail', (req, done) => {
   const {file} = req;
 
-  const resultado = Jimp.read(file.path)
+  const result = Jimp.read(file.path)
   .then(image => {
     return image
       .resize(100, 100) // resize
@@ -18,6 +18,6 @@ responder.on('thumbnail', (req, done) => {
   .catch(err => {
     console.error(err);
   });
-  
-  done(resultado);
+
+  done(result);
 });
