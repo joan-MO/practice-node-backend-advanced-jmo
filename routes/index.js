@@ -7,7 +7,6 @@ const filtersFind = require('../utils/utils')
 /* GET home page. */
 router.get('/', asyncHandler(async (req, res, next) => {
 
-    try {
         const name = req.query.name;
         const sale = req.query.sale;
         const price = req.query.price;
@@ -24,10 +23,6 @@ router.get('/', asyncHandler(async (req, res, next) => {
         res.locals.anuncios = result
     
         res.render('index');    
-    } catch (error) {
-        next(error)
-    }
-
  
 }));
 

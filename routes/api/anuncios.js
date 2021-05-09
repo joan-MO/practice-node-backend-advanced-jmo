@@ -23,8 +23,7 @@ var upload = multer({ storage: storage })
 //GET /apiv1/anuncios
 
 router.get('/',jwtAuthentificate, asyncHandler(async (req, res, next) => {
-
-    try {     
+     
         const name = req.query.name;
         const sale = req.query.sale;
         const price = req.query.price;
@@ -39,10 +38,6 @@ router.get('/',jwtAuthentificate, asyncHandler(async (req, res, next) => {
     
         const resultado = await Anuncio.list(filters, limit, start, fields, sort);
         res.json(resultado);
-        
-    } catch (error) {
-        next(error);
-    }
 
 }));
 
@@ -79,10 +74,7 @@ router.post('/',upload.single('photo'), asyncHandler(async (req, res, next) => {
 
     await anuncio.save();
 
-    res.status(201).json({ result: anuncio});
-
-res.send('test')
-    
+    res.status(201).json({ result: anuncio});    
 
 }));
 
