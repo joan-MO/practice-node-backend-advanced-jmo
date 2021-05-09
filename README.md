@@ -34,10 +34,18 @@ mongod (to run your database mongo)
 Copy .env.example to .env and review the config with your real data in this case for jwt auth.
 
 
-This command is used to run microservices and applications (the microservice is necessary to upload images and change their size):
+This command is used to run the microservice and the project (the microservice is necessary to upload images and change their size):
 
 ```
 npx pm2 start
+```
+
+The other method that you can run the project and microservice and see the logs is this:
+```
+npm run dev
+```
+```
+npm run thumbnailService
 ```
 
 The default port to connect to is : 3000 /` localhost:3000`
